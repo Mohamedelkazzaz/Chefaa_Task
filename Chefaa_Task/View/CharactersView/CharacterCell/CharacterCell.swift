@@ -15,9 +15,9 @@ class CharacterCell: UITableViewCell {
     @IBOutlet weak var marvelNameLabel: UILabel!
     
     
-    func setup(character: CharacterDataContainer?){
-        marvelNameLabel.text = character?.results.first?.name
-        marvelImageView.sd_setImage(with: URL(string: character?.results.first?.thumbnail.path ?? ""), placeholderImage: UIImage(named: "placeholder.png"))
+    func setup(character: Character?){
+        marvelNameLabel.text = character?.name
+        marvelImageView.sd_setImage(with: URL(string: character?.thumbnail.path ?? ""), placeholderImage: UIImage(named: "placeholder.png"))
 
     }
 }

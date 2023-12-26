@@ -11,5 +11,5 @@ import Foundation
 import UIKit
 
 protocol ApiService{
-    func fetchCharacters(pageNumber: Int, completion: @escaping (([CharacterDataContainer]?, Error?) -> Void))
+    func fetchCharacters(pageNumber: Int, completion: @escaping (([Character]?, Error?) -> Void))
 }

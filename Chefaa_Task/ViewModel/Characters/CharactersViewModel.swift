@@ -9,14 +9,14 @@ import Foundation
 
 class CharactersViewModel {
 var searchedText = ""
-var characterModel: CharacterDataContainer?
-var character: [CharacterDataContainer] = [] {
+var characterModel: Character?
+var character: [Character] = [] {
     didSet {
         filterdCharacters = character
 //        search(with: searchedText)
     }
 }
-var filterdCharacters: [CharacterDataContainer] = [] {
+var filterdCharacters: [Character] = [] {
     didSet {
         bindingData(filterdCharacters,nil)
     }
@@ -27,7 +27,7 @@ var error: Error? {
     }
 }
 let apiService: ApiService
-var bindingData: (([CharacterDataContainer]?,Error?) -> Void) = {_, _ in }
+var bindingData: (([Character]?,Error?) -> Void) = {_, _ in }
 init(apiService: ApiService = NetworkManager()) {
     self.apiService = apiService
 }
@@ -70,12 +70,12 @@ private func fetchCharacters(pageNumber: Int){
 //    }
 //}
 
-func getCharacters() -> [CharacterDataContainer]?{
+func getCharacters() -> [Character]?{
     return filterdCharacters
     
 }
 
-func getCharacter(indexPath: IndexPath) -> CharacterDataContainer?{
+func getCharacter(indexPath: IndexPath) -> Character?{
     guard indexPath.row < filterdCharacters.count else{
         return nil
     }
