@@ -1,0 +1,84 @@
+//
+//  CharactersViewModel.swift
+//  Chefaa_Task
+//
+//  Created by Mohamed Elkazzaz on 25/12/2023.
+//
+
+import Foundation
+
+class CharactersViewModel {
+var searchedText = ""
+var characterModel: CharacterDataContainer?
+var character: [CharacterDataContainer] = [] {
+    didSet {
+        filterdCharacters = character
+//        search(with: searchedText)
+    }
+}
+var filterdCharacters: [CharacterDataContainer] = [] {
+    didSet {
+        bindingData(filterdCharacters,nil)
+    }
+}
+var error: Error? {
+    didSet {
+        bindingData(nil, error)
+    }
+}
+let apiService: ApiService
+var bindingData: (([CharacterDataContainer]?,Error?) -> Void) = {_, _ in }
+init(apiService: ApiService = NetworkManager()) {
+    self.apiService = apiService
+}
+
+func viewIsloaded() {
+    fetchCharacters(pageNumber: 1)
+}
+
+func checkIfNeedToFetchNewPage() {
+    guard searchedText.isEmpty else{
+        return
+    }
+    let pageNumber = self.character.count / 20 + 1
+    fetchCharacters(pageNumber: pageNumber)
+}
+
+private func fetchCharacters(pageNumber: Int){
+    apiService.fetchCharacters(pageNumber: pageNumber) { characters, error in
+        if let characters = characters {
+            // add to core data
+            
+            
+            self.character.append(contentsOf: characters)
+            print(self.character)
+        }
+        if let error = error {
+            self.error = error
+        }
+    }
+}
+//func search(with: String) {
+//    searchedText = with
+//    if with.isEmpty {
+//        filterdCharacters = character
+//        return
+//    }
+//
+//    self.filterdCharacters = self.character.filter { itemCity in
+//        return itemCity.name?.contains(with) ?? false
+//    }
+//}
+
+func getCharacters() -> [CharacterDataContainer]?{
+    return filterdCharacters
+    
+}
+
+func getCharacter(indexPath: IndexPath) -> CharacterDataContainer?{
+    guard indexPath.row < filterdCharacters.count else{
+        return nil
+    }
+    return filterdCharacters[indexPath.row]
+}
+}
