@@ -19,7 +19,7 @@ class GalleryViewController: UIViewController {
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
         
-        galleryCollectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "categoryCell")
+//        galleryCollectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "categoryCell")
         
         galleryCollectionView.selectItem(at: selsectedIndex, animated: true, scrollPosition: .left)
     }
@@ -29,29 +29,16 @@ class GalleryViewController: UIViewController {
     }
 }
 
-extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gallery?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-        cell.configureCell(item: gallery?[indexPath.row])
+        let cell = galleryCollectionView.dequeueReusableCell(withReuseIdentifier: "galleryCell", for: indexPath) as! GalleryCell
+        cell.galleryCell(item: gallery?[indexPath.row])
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            //For entire screen size
-            let screenSize = UIScreen.main.bounds.size
-            return screenSize
-            //If you want to fit the size with the size of ViewController use bellow
-            let viewControllerSize = self.view.frame.size
-            return viewControllerSize
-
-            // Even you can set the cell to uicollectionview size
-            let cvRect = collectionView.frame
-            return CGSize(width: cvRect.width, height: cvRect.height)
-
-
-        }
+    
 }
