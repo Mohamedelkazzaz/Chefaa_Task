@@ -10,9 +10,9 @@ import Foundation
 
 
 struct Url {
-    var pageNumber = Int()
+//    var pageNumber = Int()
     var url: String {
-        return "http(s)://gateway.marvel.com/"
+        return "https://gateway.marvel.com/v1/public/"
     }
     
     

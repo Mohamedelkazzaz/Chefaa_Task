@@ -33,19 +33,19 @@ init(apiService: ApiService = NetworkManager()) {
 }
 
 func viewIsloaded() {
-    fetchCharacters(pageNumber: 1)
+    fetchCharacters(offset: 1)
 }
 
 func checkIfNeedToFetchNewPage() {
     guard searchedText.isEmpty else{
         return
     }
-    let pageNumber = self.character.count / 20 + 1
-    fetchCharacters(pageNumber: pageNumber)
+    let offset = self.character.count / 20 + 1
+    fetchCharacters(offset: offset)
 }
 
-private func fetchCharacters(pageNumber: Int){
-    apiService.fetchCharacters(pageNumber: pageNumber) { characters, error in
+private func fetchCharacters(offset: Int){
+    apiService.fetchCharacters() { characters, error in
         if let characters = characters {
             // add to core data
             
