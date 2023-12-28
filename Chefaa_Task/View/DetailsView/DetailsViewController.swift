@@ -19,8 +19,9 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var storiesCollectionView: UICollectionView!
     @IBOutlet weak var eventsCollectionView: UICollectionView!
     
-    var id = 0
+
     var details: Character?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,6 +44,7 @@ class DetailsViewController: UIViewController {
     }
     
     func updateUI(){
+        marvelImageView.sd_setImage(with: URL(string: details?.thumbnail?.urlPhoto ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
         marvelNameLabel.text = details?.name
         descriptionLabel.text = details?.description
     }
@@ -65,27 +67,43 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == comicsCollectionView {
             let cell = comicsCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.nameLabel.text = details?.comics?.items?[indexPath.row].name
-            cell.categoryImageView.sd_setImage(with: URL(string: details?.comics?.items?[indexPath.row].resourceURI ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
+            cell.configureCell(item: details?.comics?.items?[indexPath.row])
             return cell
         }else if collectionView == seriesCollectionView {
             let cell = seriesCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as!  CategoryCell
-            cell.categoryImageView.sd_setImage(with: URL(string: details?.series?.items?[indexPath.row].resourceURI ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
-            cell.nameLabel.text = details?.series?.items?[indexPath.row].name
+            cell.configureCell(item: details?.series?.items?[indexPath.row])
             return cell
         }else if collectionView == storiesCollectionView {
             let cell = storiesCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.categoryImageView.sd_setImage(with: URL(string: details?.stories?.items?[indexPath.row].resourceURI ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
-            cell.nameLabel.text = details?.stories?.items?[indexPath.row].name
+            cell.configureCell(item: details?.stories?.items?[indexPath.row])
             return cell
         }else {
             let cell = eventsCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.categoryImageView.sd_setImage(with: URL(string: details?.events?.items?[indexPath.row].resourceURI ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
-            cell.nameLabel.text = details?.events?.items?[indexPath.row].name
+            cell.configureCell(item: details?.events?.items?[indexPath.row])
             return cell
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let stoaryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = stoaryBoard.instantiateViewController(withIdentifier: "GalleryViewController") as! GalleryViewController
+        vc.modalPresentationStyle = .fullScreen
+       
+        if collectionView == comicsCollectionView{
+            
+            vc.gallery = details?.comics?.items
+            
+        }else if collectionView == seriesCollectionView{
+            vc.gallery = details?.series?.items
+        }else if collectionView == storiesCollectionView{
+            vc.gallery = details?.stories?.items
+        }else{
+            vc.gallery = details?.events?.items
+        }
+        
+        vc.selsectedIndex = indexPath
+        self.present(vc, animated: true)
+    }
     
     
     

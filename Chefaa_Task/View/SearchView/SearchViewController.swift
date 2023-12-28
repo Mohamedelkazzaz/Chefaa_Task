@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
         searchTableView.dataSource = self
         
         searchBar.delegate = self
-        navigationItem.setHidesBackButton(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         
         viewModel.viewIsloaded()
         viewModel.bindingData = { character, error in
@@ -34,9 +34,13 @@ class SearchViewController: UIViewController {
         }
     }
     }
-    
+  
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        self.navigationController?.dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

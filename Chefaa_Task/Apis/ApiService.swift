@@ -12,5 +12,6 @@ import UIKit
 
 protocol ApiService{
     func fetchCharacters(offset: Int,completion: @escaping (([Character]?, Error?) -> Void))
+    func fetchResource(uriResource: String,completion: @escaping (([Character]?, Error?) -> Void))
 //    func getCharacterById(characterId: Int, completion: @escaping (([Character]?, Error?) -> Void))
 }

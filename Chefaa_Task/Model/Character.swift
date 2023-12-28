@@ -43,8 +43,8 @@ struct Comics: Codable {
 }
 
 // MARK: - ComicsItem
-struct ComicsItem: Codable {
-    let resourceURI, name: String?
+struct ComicsItem: Codable,BaseItem {
+    var resourceURI, name: String?
 }
 
 // MARK: - Stories
@@ -55,17 +55,23 @@ struct Stories: Codable {
 }
 
 // MARK: - StoriesItem
-struct StoriesItem: Codable {
-    let resourceURI, name, type: String?
+struct StoriesItem: Codable,BaseItem {
+    var resourceURI, name, type: String?
 }
 
 // MARK: - Thumbnail
 struct Thumbnail: Codable {
     let path, thumbnailExtension: String?
+    var urlPhoto: String{
+        if let path = path, let thumbnailExtension = thumbnailExtension{
+            return path + "." + thumbnailExtension
+        }
+        return ""
+    }
 
     enum CodingKeys: String, CodingKey {
         case path
-        case thumbnailExtension 
+        case thumbnailExtension = "extension"
     }
 }
 
