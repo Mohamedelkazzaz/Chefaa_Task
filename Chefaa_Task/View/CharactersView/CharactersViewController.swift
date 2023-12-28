@@ -35,6 +35,9 @@ class CharactersViewController: UIViewController {
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
+        let stoaryBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = stoaryBoard.instantiateViewController(withIdentifier: "SearchViewController") as! SearchViewController
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
 

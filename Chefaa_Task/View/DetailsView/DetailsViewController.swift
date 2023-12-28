@@ -24,7 +24,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(details)
+    
         
         updateUI()
         

@@ -13,7 +13,7 @@ var characterModel: Character?
 var character: [Character] = [] {
     didSet {
         filterdCharacters = character
-//        search(with: searchedText)
+
     }
 }
 var filterdCharacters: [Character] = [] {
@@ -47,9 +47,7 @@ func checkIfNeedToFetchNewPage() {
 private func fetchCharacters(offset: Int){
     apiService.fetchCharacters(offset: offset) { characters, error in
         if let characters = characters {
-            // add to core data
-            
-            
+    
             self.character.append(contentsOf: characters)
             print(self.character)
         }
@@ -58,17 +56,7 @@ private func fetchCharacters(offset: Int){
         }
     }
 }
-//func search(with: String) {
-//    searchedText = with
-//    if with.isEmpty {
-//        filterdCharacters = character
-//        return
-//    }
-//
-//    self.filterdCharacters = self.character.filter { itemCity in
-//        return itemCity.name?.contains(with) ?? false
-//    }
-//}
+
 
 func getCharacters() -> [Character]?{
     return filterdCharacters

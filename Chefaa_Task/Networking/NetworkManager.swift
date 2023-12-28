@@ -56,35 +56,35 @@ class NetworkManager: ApiService{
     }
 
     
-    func getCharacterById(characterId: Int,completion: @escaping (([Character]?, Error?) -> Void)) {
-        if let url = URL(string: Url().url + "\(characterId)"){
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            let parameters: [String: Any] = [
-                "apikey": NetworkManager.apiKey,
-                "ts": "1",
-                "hash": hash
-            ]
-
-            do {
-                request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-            } catch {
-                print("Error encoding parameters: \(error)")
-                return
-            }
-            print(request)
-            URLSession.shared.dataTask(with: request) { data, response, error in
-               
-                do{
-                    let decodedData = try JSONDecoder().decode(CharacterDataWrapper.self, from: data ?? Data())
-                    completion(decodedData.data?.results,nil)
-                }catch(let error){
-                    completion(nil,error)
-                    print(error)
-                }
-            }.resume()
-        }
-    }
+//    func getCharacterById(characterId: Int,completion: @escaping (([Character]?, Error?) -> Void)) {
+//        if let url = URL(string: Url().url + "\(characterId)"){
+//            var request = URLRequest(url: url)
+//            request.httpMethod = "GET"
+//            let parameters: [String: Any] = [
+//                "apikey": NetworkManager.apiKey,
+//                "ts": "1",
+//                "hash": hash
+//            ]
+//
+//            do {
+//                request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+//            } catch {
+//                print("Error encoding parameters: \(error)")
+//                return
+//            }
+//            print(request)
+//            URLSession.shared.dataTask(with: request) { data, response, error in
+//               
+//                do{
+//                    let decodedData = try JSONDecoder().decode(CharacterDataWrapper.self, from: data ?? Data())
+//                    completion(decodedData.data?.results,nil)
+//                }catch(let error){
+//                    completion(nil,error)
+//                    print(error)
+//                }
+//            }.resume()
+//        }
+//    }
     
     
     func md5(_ string: String) -> String {
