@@ -20,7 +20,7 @@ class NetworkManager: ApiService{
         return self.md5(hashValue)
     }
     
-     func fetchCharacters(completion: @escaping (([Character]?, Error?) -> Void)) {
+     func fetchCharacters(offset: Int,completion: @escaping (([Character]?, Error?) -> Void)) {
            
          let url = URL(string: Url().url + "characters?")
 
@@ -31,7 +31,8 @@ class NetworkManager: ApiService{
         let paramters: [String: Any] = [
             "apikey": NetworkManager.apiKey,
             "ts": "1",
-            "hash": "ac784447611653165bc71c53d4b45595"
+            "hash": "ac784447611653165bc71c53d4b45595",
+            "offset": offset
         ]
        
         AF.request(url!,

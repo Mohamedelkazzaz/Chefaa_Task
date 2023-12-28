@@ -45,7 +45,7 @@ func checkIfNeedToFetchNewPage() {
 }
 
 private func fetchCharacters(offset: Int){
-    apiService.fetchCharacters() { characters, error in
+    apiService.fetchCharacters(offset: offset) { characters, error in
         if let characters = characters {
             // add to core data
             
