@@ -20,8 +20,8 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var eventsCollectionView: UICollectionView!
     
 
-    var details: Character?
-    
+
+    var viewModel: DetailsViewModel! = DetailsViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,9 +44,13 @@ class DetailsViewController: UIViewController {
     }
     
     func updateUI(){
-        marvelImageView.sd_setImage(with: URL(string: details?.thumbnail?.urlPhoto ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
-        marvelNameLabel.text = details?.name
-        descriptionLabel.text = details?.description
+        marvelImageView.sd_setImage(with: URL(string: viewModel.character?.thumbnail?.urlPhoto ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
+        marvelNameLabel.text = viewModel.character?.name
+        if viewModel.character?.description == ""{
+            descriptionLabel.text = "N/A"
+        }else{
+            descriptionLabel.text = viewModel.character?.description
+        }
     }
     
 }
@@ -54,32 +58,32 @@ class DetailsViewController: UIViewController {
 extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == comicsCollectionView {
-            return details?.comics?.items?.count ?? 0
+            return viewModel.getCharacters()?.comics?.items?.count ?? 0
         }else if collectionView == seriesCollectionView {
-            return details?.series?.items?.count ?? 0
+            return viewModel.getCharacters()?.series?.items?.count ?? 0
         }else if collectionView == storiesCollectionView {
-            return details?.stories?.items?.count ?? 0
+            return viewModel.getCharacters()?.stories?.items?.count ?? 0
         }else {
-            return details?.events?.items?.count ?? 0
+            return viewModel.getCharacters()?.events?.items?.count ?? 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == comicsCollectionView {
             let cell = comicsCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.configureCell(item: details?.comics?.items?[indexPath.row])
+            cell.configureCell(item: viewModel.getCharacter(indexPath: indexPath)?.comics?.items?[indexPath.row])
             return cell
         }else if collectionView == seriesCollectionView {
             let cell = seriesCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as!  CategoryCell
-            cell.configureCell(item: details?.series?.items?[indexPath.row])
+            cell.configureCell(item: viewModel.getCharacter(indexPath: indexPath)?.series?.items?[indexPath.row])
             return cell
         }else if collectionView == storiesCollectionView {
             let cell = storiesCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.configureCell(item: details?.stories?.items?[indexPath.row])
+            cell.configureCell(item: viewModel.getCharacter(indexPath: indexPath)?.stories?.items?[indexPath.row])
             return cell
         }else {
             let cell = eventsCollectionView.dequeueReusableCell(withReuseIdentifier: "categoryCell", for: indexPath) as! CategoryCell
-            cell.configureCell(item: details?.events?.items?[indexPath.row])
+            cell.configureCell(item: viewModel.getCharacter(indexPath: indexPath)?.events?.items?[indexPath.row])
             return cell
         }
     }
@@ -91,14 +95,14 @@ extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDel
        
         if collectionView == comicsCollectionView{
             
-            vc.gallery = details?.comics?.items
+            vc.gallery = viewModel.character?.comics?.items
             
         }else if collectionView == seriesCollectionView{
-            vc.gallery = details?.series?.items
+            vc.gallery = viewModel.character?.series?.items
         }else if collectionView == storiesCollectionView{
-            vc.gallery = details?.stories?.items
+            vc.gallery = viewModel.character?.stories?.items
         }else{
-            vc.gallery = details?.events?.items
+            vc.gallery = viewModel.character?.events?.items
         }
         
         vc.selsectedIndex = indexPath

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import Alamofire
 import CommonCrypto
+import CryptoKit
 
 class NetworkManager: ApiService{
    
@@ -104,5 +105,6 @@ class NetworkManager: ApiService{
 
         return ""
     }
+    
 
 }

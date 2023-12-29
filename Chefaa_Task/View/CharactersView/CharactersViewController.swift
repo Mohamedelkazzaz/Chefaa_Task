@@ -77,7 +77,7 @@ extension CharactersViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stoaryBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = stoaryBoard.instantiateViewController(withIdentifier: "DetailsViewController") as! DetailsViewController
-        vc.details = viewModel.getCharacter(indexPath: indexPath)
+        vc.viewModel.character = viewModel.getCharacter(indexPath: indexPath)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

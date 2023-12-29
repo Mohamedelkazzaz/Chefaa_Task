@@ -19,7 +19,6 @@ class GalleryViewController: UIViewController {
         galleryCollectionView.delegate = self
         galleryCollectionView.dataSource = self
         
-//        galleryCollectionView.register(UINib(nibName: "CategoryCell", bundle: nil), forCellWithReuseIdentifier: "categoryCell")
         
         galleryCollectionView.selectItem(at: selsectedIndex, animated: true, scrollPosition: .left)
     }

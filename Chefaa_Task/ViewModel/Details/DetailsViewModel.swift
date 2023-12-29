@@ -15,13 +15,13 @@ var bindingData: ((Character) -> Void) = {_ in }
 
 
 
-//func getCharacters() -> [Character]?{
-//    return character.comics.
-//    
-//}
-//
-//func getCharacter(indexPath: IndexPath) -> Character?{
-//    
-//    return character[indexPath.row]
-//}
+func getCharacters() -> Character?{
+    return character
+    
+}
+
+func getCharacter(indexPath: IndexPath) -> Character?{
+    
+    return character
+}
 }
