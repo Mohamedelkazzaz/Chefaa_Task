@@ -41,6 +41,7 @@
 		E8AF2F1A2B3EDB2100704D5B /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF2F192B3EDB2000704D5B /* NetworkMock.swift */; };
 		E8AF2F1C2B3EDC5C00704D5B /* NetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF2F1B2B3EDC5C00704D5B /* NetworkTest.swift */; };
 		E8AF2F1E2B3EE6FA00704D5B /* CharactersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF2F1D2B3EE6FA00704D5B /* CharactersViewModelTests.swift */; };
+		E8AF2F202B3EF47800704D5B /* DetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8AF2F1F2B3EF47800704D5B /* DetailsViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		E8AF2F192B3EDB2000704D5B /* NetworkMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMock.swift; sourceTree = "<group>"; };
 		E8AF2F1B2B3EDC5C00704D5B /* NetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTest.swift; sourceTree = "<group>"; };
 		E8AF2F1D2B3EE6FA00704D5B /* CharactersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModelTests.swift; sourceTree = "<group>"; };
+		E8AF2F1F2B3EF47800704D5B /* DetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModelTests.swift; sourceTree = "<group>"; };
 		ECECAC1B5B71B3AEFF006F07 /* Pods-Chefaa_Task-Chefaa_TaskUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chefaa_Task-Chefaa_TaskUITests.debug.xcconfig"; path = "Target Support Files/Pods-Chefaa_Task-Chefaa_TaskUITests/Pods-Chefaa_Task-Chefaa_TaskUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F48B839C858E7DF1F666B020 /* Pods-Chefaa_TaskTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chefaa_TaskTests.release.xcconfig"; path = "Target Support Files/Pods-Chefaa_TaskTests/Pods-Chefaa_TaskTests.release.xcconfig"; sourceTree = "<group>"; };
 		F61A3F3735B52928AF25E582 /* Pods-Chefaa_Task.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chefaa_Task.debug.xcconfig"; path = "Target Support Files/Pods-Chefaa_Task/Pods-Chefaa_Task.debug.xcconfig"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				E8AF2F182B3EDAF000704D5B /* Mocks */,
 				E89BC4BB2B3A2C9200CED366 /* Chefaa_TaskTests.swift */,
 				E8AF2F1D2B3EE6FA00704D5B /* CharactersViewModelTests.swift */,
+				E8AF2F1F2B3EF47800704D5B /* DetailsViewModelTests.swift */,
 			);
 			path = Chefaa_TaskTests;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 			files = (
 				E8AF2F1E2B3EE6FA00704D5B /* CharactersViewModelTests.swift in Sources */,
 				E8AF2F1A2B3EDB2100704D5B /* NetworkMock.swift in Sources */,
+				E8AF2F202B3EF47800704D5B /* DetailsViewModelTests.swift in Sources */,
 				E8AF2F1C2B3EDC5C00704D5B /* NetworkTest.swift in Sources */,
 				E89BC4BC2B3A2C9200CED366 /* Chefaa_TaskTests.swift in Sources */,
 			);
