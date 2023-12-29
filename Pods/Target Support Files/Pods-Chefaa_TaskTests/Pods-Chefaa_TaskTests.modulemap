@@ -1,0 +1,6 @@
+framework module Pods_Chefaa_TaskTests {
+  umbrella header "Pods-Chefaa_TaskTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
