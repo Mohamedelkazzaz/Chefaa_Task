@@ -14,7 +14,7 @@ import CryptoKit
 class NetworkManager: ApiService{
    
     private static let apiKey = "97ac84ccfa873d9c1d7583c15eff48d5"
-    private static let ts = ""
+    private static let ts = Date().formattedCurrentDateTime
     private static let privateKey = "073cd3d9c8fcab7e4228035d3eb31821e1e86277"
     private var hash: String {
         let hashValue = NetworkManager.ts + NetworkManager.privateKey + NetworkManager.apiKey
@@ -31,8 +31,8 @@ class NetworkManager: ApiService{
         
         let paramters: [String: Any] = [
             "apikey": NetworkManager.apiKey,
-            "ts": "1",
-            "hash": "ac784447611653165bc71c53d4b45595",
+            "ts": NetworkManager.ts,
+            "hash": hash,
             "offset": offset
         ]
        
@@ -56,7 +56,7 @@ class NetworkManager: ApiService{
         }
     }
 
-    func fetchResource(uriResource: String,completion: @escaping (([Character]?, Error?) -> Void)) {
+    func fetchResource(uriResource: String,completion: @escaping (([Character]?, Error?) -> Void)) -> DataRequest {
           
         let url = URL(string: uriResource)
 
@@ -71,7 +71,7 @@ class NetworkManager: ApiService{
            
        ]
       
-       AF.request(url!,
+       return AF.request(url!,
                   method: .get,
                   parameters: paramters,
                   encoding: URLEncoding.default, headers: headers).response { (response:DataResponse)  in
@@ -105,6 +105,17 @@ class NetworkManager: ApiService{
 
         return ""
     }
+
+
     
 
+}
+
+
+extension Date {
+    var formattedCurrentDateTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss" // Use uppercase 'H' for 24-hour format
+        return dateFormatter.string(from: self)
+    }
 }

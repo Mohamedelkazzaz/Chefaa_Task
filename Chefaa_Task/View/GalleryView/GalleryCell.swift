@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class GalleryCell: UICollectionViewCell {
     
@@ -13,9 +14,11 @@ class GalleryCell: UICollectionViewCell {
     
     @IBOutlet weak var marvelNameLabel: UILabel!
     
+    private var request: DataRequest?
+    
     func galleryCell(item: BaseItem?){
         marvelNameLabel.text = item?.name
-        NetworkManager().fetchResource(uriResource: item?.resourceURI ?? "") { [weak self] items, error in
+        request = NetworkManager().fetchResource(uriResource: item?.resourceURI ?? "") { [weak self] items, error in
             if let item = items?.first {
                 self?.marvelImageView.sd_setImage(with: URL(string: item.thumbnail?.urlPhoto ?? ""), placeholderImage: UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com"))
             }
@@ -23,5 +26,11 @@ class GalleryCell: UICollectionViewCell {
                 self?.marvelImageView.image = UIImage(named: "marvel-logo-2D20B064BD-seeklogo.com")
             }
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.marvelImageView.image = UIImage(named: "")
+        request?.cancel()
     }
 }

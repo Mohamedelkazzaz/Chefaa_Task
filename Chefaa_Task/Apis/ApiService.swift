@@ -9,8 +9,9 @@ import Foundation
 
 import Foundation
 import UIKit
+import Alamofire
 
 protocol ApiService{
     func fetchCharacters(offset: Int,completion: @escaping (([Character]?, Error?) -> Void))
-    func fetchResource(uriResource: String,completion: @escaping (([Character]?, Error?) -> Void))
+    func fetchResource(uriResource: String,completion: @escaping (([Character]?, Error?) -> Void)) -> DataRequest
 }
